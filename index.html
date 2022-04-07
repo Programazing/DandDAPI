@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            const baseUrl = 'https://www.dnd5eapi.co'
+            const monsters = baseUrl+'/api/monsters'
+            fetch(monsters)
+            .then(data => data.json())
+            .then((json) => {
+                postData(json);
+            })
+
+            function postData(data){
+                const container = document.createElement('div')
+                container.setAttribute('class', 'container')
+                document.body.append(container);
+
+                for(item of data.results){
+                    const card = document.createElement('div');
+                    card.setAttribute('class', 'card');
+
+                    const a = document.createElement('a')
+                    a.textContent = item.name
+                    a.href = baseUrl + item.url
+                    
+                    card.appendChild(a)
+                    container.appendChild(card)
+
+                }              
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Monsters of D&D</h1>
+    </body>
+</html>
